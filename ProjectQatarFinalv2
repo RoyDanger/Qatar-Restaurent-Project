@@ -1,0 +1,438 @@
+AllUserDictip={}
+
+import math
+import random
+OrderId=[]
+for i in range(100,1000):
+    OrderId.append(f'S{i}')
+DineInFoodOrderedLoist=[]
+totalspendinallorders=[]
+SelfPickUpOrderedList=[]
+OnlineOrderList=[]
+
+#------------------------------------------------------Option 2.2
+def Statistics():
+    print('Please Enter the option to print the statistics.\n 1-All Dine in Orders\n 2- All Pick up Orders\n 3- All Devlivers.\n 4- All Orders (Ascending order).\n 5 - Total Amount Spent on All orders\n 6 -To go to Previous Menu')
+    stast=input("EnterHere : ")
+    if stast=='1':
+        print(DineInFoodOrderedLoist)
+        Statistics()
+    elif stast=='2':
+        print(SelfPickUpOrderedList)
+        Statistics()
+    elif stast=='3':
+        print(OnlineOrderList)
+        Statistics()
+    elif stast=='4':
+        print("Sorry i can't Do it ")
+        Statistics()
+    elif stast=='5':
+        print(math.fsum(totalspendinallorders))
+        Statistics()
+
+    elif stast=='6':
+        page2_1.aftersignin(1)
+    else:
+        print("please enter a Valid option")
+        Statistics()
+#------------------------------------------Dine in function  Drink Menu --------------------------------
+DrinkCost=[]
+def DrinkMenu():
+    global DrinkCost
+    print("--------------------------------------\nEnter 1 for Coffee Price AUD 2\nEnter 2 for Colddrink Price AUD 4\nEnter 3 for Shake Price AUD 6\nEnter 4 for Checkout\n--------------------------------------")
+    Drinkoption=input("Enter your option: ")
+    if Drinkoption=='1':
+        print('-------------\nCoffe has been selected\n---------------\nPlease Enter 4 for Checkout\n-------------------------')
+        DrinkCost.append(2)
+        DrinkMenu()#,calculateBill()
+    elif Drinkoption=='2':
+        print('-------------\nCoffe has been selected\n---------------\nPlease Enter 4 for Checkout\n-------------------------')
+        DrinkCost.append(4)
+        DrinkMenu()#,calculateBill()
+    elif Drinkoption=='3':
+        print('-------------\nShake has been selected\n---------------\nPlease Enter 4 for Checkout\n-------------------------')
+        DrinkCost.append(6)
+        DrinkMenu()#calculateBill()
+    elif Drinkoption=='4':
+        TotalBill.dineinBill()      
+        
+    else:
+        print("Please Enter 4 for checkout")
+        DrinkMenu()
+sum(DrinkCost)
+#--------------------------------------------------------------------------------
+#------------------------ Calculating bill -------------------------------------- 
+#--------------------------------------------------------------------------------
+class TotalBill():
+    def dineinBill():
+        print("****** Please Enter Y to procced to checkout or Enter N to cancel order: ********")
+        Checkout=input("Enter here: ")
+        Checkout=Checkout.upper()
+        if Checkout=="Y":
+        # Aro If lagbo jode user address nh dai
+           print(f'Your Total payble amount is:{sum(costFood)+sum(DrinkCost)+(sum(costFood)+sum(DrinkCost))*0.15} including AUD {(sum(costFood)+sum(DrinkCost))*0.15} Service charges')
+           TotalBill.DineInConfrimation()
+        # Now date of booking and other information
+        elif Checkout=="N":
+            pass # Here 2.1 a jau chandu
+        else:
+            print("Please Enter only 'Y' or 'N'")
+    def selfpickUpbill():
+        print("****** Please Enter Y to procced to checkout or Enter N to cancel order: ********")
+        Checkout=input("Enter here: ")
+        Checkout=Checkout.upper()
+        if Checkout=="Y":
+        # Aro If lagbo jode user address nh dai 
+           print(f'Your Total payble amount is:{sum(costFood)}')
+           TotalBill.selfpickupOrderConfirmation()
+
+
+        # Now date of booking and other information
+        elif Checkout=="N":
+            page2_1.afterOptions(1) #-------------checking
+        else:
+            print("Please Enter only 'Y' or 'N'")
+    def OnlineDeveliveryConfrimation():
+        global OnlinedevliveryFee
+        DateOfDelivery=input("Please enter the Date of Delivery: ")
+        TimeOfDelivery=input("Please enter the Time of Delivery: ")
+        Distance=input("Please enter the Distance from the restaurant: ")
+        if Distance.isnumeric()==False:
+            print('Enter only integer(number)')
+            TotalBill.OnlineDeveliveryConfrimation()
+        elif float(Distance)<=5 and float(Distance)>0:
+            OnlinedevliveryFee=sum(costFood)+5
+            print("Thank you for your order , Your Order has benn confrimed")
+            selflist=f'OrderID :{random.choice(OrderId)} Date :{DateOfDelivery} Total amount paid: AUD {sum(costFood)+5} Order Type : selfPickUp '
+            OnlineOrderList.append(selflist)
+            totalspendinallorders.append(sum(costFood)+5)
+
+            TotalBill.OnlineOrderProcceding()
+        elif float(Distance)<=10 and float(Distance)>5:
+            OnlinedevliveryFee=sum(costFood)+10
+            print("Thank you for your order , Your Order has benn confrimed")
+            selflist=f'OrderID :{random.choice(OrderId)} Date :{DateOfDelivery} Total amount paid: AUD {sum(costFood)+10} Order Type : selfPickUp '
+            OnlineOrderList.append(selflist)
+            totalspendinallorders.append(sum(costFood)+10)
+            TotalBill.OnlineOrderProcceding()
+        elif float(Distance)<=15 and float(Distance)>10:
+            OnlinedevliveryFee=sum(costFood)+18
+            print("Thank you for your order , Your Order has benn confrimed")
+            selflist=f'OrderID :{random.choice(OrderId)} Date :{DateOfDelivery} Total amount paid: AUD {sum(costFood)+18} Order Type : selfPickUp '
+            OnlineOrderList.append(selflist)
+            totalspendinallorders.append(sum(costFood)+18)
+            TotalBill.OnlineOrderProcceding()
+        elif float(Distance)>15: 
+            print("No Delivery provided")
+            page2_1.aftersignin(1)
+        else:
+            page2_1.aftersignin(1)
+    def OnlineOrderProcceding():
+        print(F'Your total bill for online order including Deliverycharge is AUD {OnlinedevliveryFee}')
+        
+
+        print("****** Please Enter Y to procced to checkout or Enter N to cancel order: ********")
+        Checkout=input("Enter here: ")
+        Checkout=Checkout.upper()
+        if Checkout=="Y":
+            print("Thank you for your order , Your Order has benn confrimed")
+            page2_1.aftersignin(1)
+        elif Checkout=="N":
+            page2_1.aftersignin(1)
+        else:
+            print("Please Enter only 'Y' or 'N'")
+
+    def selfpickupOrderConfirmation():
+        DateOfPickup=input('Please enter the Date of Pick Up: ')
+        PickUpTime=input("please enter the time of Pick Up: ")
+        NameOfPerson=input("Please enter the Name of the person: ")
+        print("Thank you for your order , Your Order has benn confrimed")
+        OrderType1='SelfPickUp'
+        selflist=f'OrderID :{random.choice(OrderId)} Date :{DateOfPickup} Total amount paid: AUD {sum(costFood)} Order Type : selfPickUp '
+        SelfPickUpOrderedList.append(selflist)
+        totalspendinallorders.append(costFood)
+        page2_1.aftersignin(1)
+    def DineInConfrimation():
+        DateOfDineIn=input("please enter the Date for booking For Dine in : ")
+        DineInTime=input("Please enter the Time for Dine In : ")
+        TotalPerson=input("Please enter the Number of Persons: ")
+        print("Thank you for your order , Your Order has benn confrimed")
+        OderType3="DineIn"
+        selflist=f'OrderID :{random.choice(OrderId)} Date :{DateOfDineIn} Total amount paid: AUD {sum(costFood)+sum(DrinkCost)+(sum(costFood)+sum(DrinkCost))*0.15} Order Type : DineIn '
+        DineInFoodOrderedLoist.append(selflist)
+        totalspendinallorders.append(sum(costFood)+sum(DrinkCost)+(sum(costFood)+sum(DrinkCost))*0.15)
+        page2_1.aftersignin(1)
+#--------------------------- ------->>>> Food menu and price <<<< ---------------------------- 
+#=============================================================================================
+costFood = [] # storing bill 
+class billaddingtolist():
+    global costFood
+    global DrinkCost
+    def FoodMenuPrice(self):
+        print("Enter 1 for Noodles Price AUD 2\nEnter 2 for Sandwich Price AUD 4\nEnter 3 for Dumpling Price AUD 6\nEnter 4 for Muffins Price AUD 8\nEnter 5 for Pasta Price AUD 10\nEnter 6 for Pizza Price AUD 20\nEnter 7 for Drinks Menu" )
+        useroptions = input( "Enter Your options: " )
+
+        if useroptions == "1":
+            print("------------------\n**Noodle** is seleted\n-------------------- \nSelect more items or Enter 7 for Drink Menu\n------------------" )
+            costFood.append( 2 )
+            billaddingtolist.FoodMenuPrice(1)
+
+        elif useroptions == "2":
+            print("----------------**Sandwich** is seleted\n--------------- \nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 4 )
+            billaddingtolist.FoodMenuPrice(1)
+
+        elif useroptions == "3":
+            print("----------------**Dumpling** is seleted \n---------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 6 )
+            billaddingtolist.FoodMenuPrice(1)
+
+        elif useroptions == "5":
+            print("----------------**Muffins** is seleted \n----------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 10 )
+            billaddingtolist.FoodMenuPrice(1)
+
+        elif useroptions == "6":
+            print("----------------**Pasta** is seleted \n------------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 20 )
+            billaddingtolist.FoodMenuPrice(1)
+
+        elif useroptions == "7":
+            DrinkMenu()
+
+        else:
+            print('!Please Select an option')
+            billaddingtolist.FoodMenuPrice(1)
+    def forotherorder():
+        print("Enter 1 for Noodles Price AUD 2\nEnter 2 for Sandwich Price AUD 4\nEnter 3 for Dumpling Price AUD 6\nEnter 4 for Muffins Price AUD 8\nEnter 5 for Pasta Price AUD 10\nEnter 6 for Pizza Price AUD 20\nEnter 7 for CheckOut" )
+        useroptions = input( "Enter Your options: " )
+        if useroptions == "1":
+            print("------------------\n**Noodle** is seleted\n-------------------- \nSelect more items or Enter 7 for Drink Menu\n------------------" )
+            costFood.append( 2 )
+            billaddingtolist.forotherorder()
+
+        elif useroptions == "2":
+            print("----------------**Sandwich** is seleted\n--------------- \nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 4 )
+            billaddingtolist.forotherorder()
+
+        elif useroptions == "3":
+            print("----------------**Dumpling** is seleted \n---------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 6 )
+            billaddingtolist.forotherorder()
+
+        elif useroptions == "5":
+            print("----------------**Muffins** is seleted \n----------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 10 )
+            billaddingtolist.forotherorder()
+
+        elif useroptions == "6":
+            print("----------------**Pasta** is seleted \n------------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 20 )
+            billaddingtolist.forotherorder()
+        elif useroptions=='7':
+            TotalBill.selfpickUpbill()
+        else:
+            billaddingtolist.forotherorder()
+    def OnlineHomeDevlibveryBill():
+        print("Enter 1 for Noodles Price AUD 2\nEnter 2 for Sandwich Price AUD 4\nEnter 3 for Dumpling Price AUD 6\nEnter 4 for Muffins Price AUD 8\nEnter 5 for Pasta Price AUD 10\nEnter 6 for Pizza Price AUD 20\nEnter 7 for CheckOut" )
+        useroptions = input( "Enter Your options: " )
+        if useroptions == "1":
+            print("------------------\n**Noodle** is seleted\n-------------------- \nSelect more items or Enter 7 for Drink Menu\n------------------" )
+            costFood.append( 2 )
+            billaddingtolist.OnlineHomeDevlibveryBill()
+
+        elif useroptions == "2":
+            print("----------------**Sandwich** is seleted\n--------------- \nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 4 )
+            billaddingtolist.OnlineHomeDevlibveryBill()
+
+        elif useroptions == "3":
+            print("----------------**Dumpling** is seleted \n---------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 6 )
+            billaddingtolist.OnlineHomeDevlibveryBill()
+
+        elif useroptions == "5":
+            print("----------------**Muffins** is seleted \n----------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 10 )
+            billaddingtolist.OnlineHomeDevlibveryBill()
+
+        elif useroptions == "6":
+            print("----------------**Pasta** is seleted \n------------------\nSelect more items or Enter 7 for Drink Menu" )
+            costFood.append( 20 )
+            billaddingtolist.OnlineHomeDevlibveryBill()
+        elif useroptions=='7':
+            TotalBill.OnlineDeveliveryConfrimation() # Home Online delivery confrimation 
+        else:
+            billaddingtolist.OnlineHomeDevlibveryBill()
+# FoodMenuPrice()
+#--------------------------------------Finish Line of Dine in Menu----------------------------------
+
+#------------------------------>>> AfterSignIn <<< ----------------------------
+# ---------------------------------------------------------------------------
+class UserData:
+    def __init__(self,Name,Address,MobileNumber,Passwords):
+        self.Name=Name
+        self.Address=Address
+        self.MobileNumber=MobileNumber
+        self.Passwords=Passwords
+    def DataaddinftoDict(self):
+        # global MobilePoint,ThisIsaNewDict #2222222222222222222@@@@@@@@@@@@
+        ThisIsaNewDict={"Name":self.Name,'UserAddress':self.Address,'UserMobile':self.MobileNumber,'UserPassword':self.Passwords}
+        MobilePoint={self.MobileNumber:ThisIsaNewDict}
+        AllUserDictip.update(MobilePoint)
+#---------------------------------------------------------------------------
+class page2_1():# task 2
+    def aftersignin(self):
+        print("----------------------------------------------------\n* Please Enter 2.1 for to Start Ordering.\n* Please Enter 2.2 to print Statistics .\n* Please Enter 3 for logout.\n----------------------------------------------------")
+        options_1=input("Enter here: ")
+        if options_1== str(2.1):
+            return afterOptions()
+        
+
+       #return #orderingpage
+        elif options_1==str(2.2):
+            Statistics()
+        elif options_1==str(3):
+            print("******Logout Succesfully******")
+            User.options()
+        else:
+            print("please chose an option")
+            page2_1.aftersignin(1)
+    # THis means User selected Start Orderinig
+
+class clsOnline():# This is for online order
+    def OnlineOrder():
+        print('------------------\nEnter  1 For Self Pick up.\nEnter 2 for Home Delivery.\nEnter 3 for previous Menu')
+        OnlineOptions=input("Enter here : ")
+        if OnlineOptions==str(1):
+            billaddingtolist.forotherorder()
+           # This is self pcik up 
+        elif OnlineOptions==str(2):
+            clsOnline.Homedevlivery()
+            # this is Home Devlivery
+        elif OnlineOptions==str(3):
+            page2_1.aftersignin(1)
+        else:
+            clsOnline().OnlineOrder()
+    def Homedevlivery():
+        if AllUserDictip[MobilePoint]['UserAddress']=='':
+            print('You have not mentioned your address,while signing up .\nPlease Enter Y if would like to enter your address\nEnter N if you would like to select other mode of order')
+            HomeUserOptonion=input('Enter here :')
+            if HomeUserOptonion=='Y':
+                NowEnterAdrees=input('Enter your address')
+                billaddingtolist.OnlineHomeDevlibveryBill()
+            elif HomeUserOptonion=="N":
+                afterOptions()
+            else:
+                print('* Choice an option')
+                clsOnline.Homedevlivery()
+        else:
+            billaddingtolist.OnlineHomeDevlibveryBill()
+def afterOptions():
+    print("----------------------------------------------------\n* Please Enter 1 for Dine in.\n* Please Enter 2 for Order Online.\n* Please Enter 3 to go to Login Page.\n----------------------------------------------------")
+        # Need to link with Sign In Page
+    OrderType=input("Enter here: ")
+    if OrderType==str(1):
+        # This is for Dine in 
+        billaddingtolist.FoodMenuPrice(1)
+
+    elif OrderType==str(2):
+        clsOnline.OnlineOrder()
+         #Order Online functions here
+    elif OrderType==str(3):
+        page2_1.aftersignin() #  will redirect to Login in page
+    else:
+        afterOptions()
+
+
+# ------------------------------------------->>> SignIn,SignUp & Exit option Page <<<----------------------------
+class UserData:
+    def __init__(self,Name,Address,MobileNumber,Passwords):
+        self.Name=Name
+        self.Address=Address
+        self.MobileNumber=MobileNumber
+        self.Passwords=Passwords
+    def DataaddinftoDict(self):
+        # global MobilePoint,ThisIsaNewDict
+        ThisIsaNewDict={"Name":self.Name,'UserAddress':self.Address,'UserMobile':self.MobileNumber,'UserPassword':self.Passwords}
+        MobilePoint={self.MobileNumber:ThisIsaNewDict}
+        AllUserDictip.update(MobilePoint)
+
+class SignInSignUpPage():
+    def options(self):
+        print("----------------------------------------------------\n* Please Enter 1 for sign up.\n* Please Enter 2 for Sign in.\n* Please Enter 3 for Quit.\n----------------------------------------------------")
+        choice = input("Enter here:  ")
+        if str(choice) == '1':
+            SignInSignUpPage.NameOfUser()
+        elif str(choice) == "2":
+            SignInSignUpPage.SignIn()
+        elif choice == '3':
+            exit()
+        else:
+           print('Unknown Error')
+           SignInSignUpPage.options(1)
+    def NameOfUser():
+        global NameofUser
+        NameofUser=input('Please enter your name : ')
+        SignInSignUpPage.Address()
+    def Address():
+        global AddressPoint
+        AddressPoint=input('Please enter your address or press enter to skip: ')
+        SignInSignUpPage.MobileNoCheck()
+    def MobileNoCheck():
+        global MobilePoint
+        MobilePoint=input('Enter your mobile no:\n')
+        if len(MobilePoint)>10 or MobilePoint.startswith("0")!=True or MobilePoint=='':
+            print("Only Numaric and 10 digit Number Allowed which start with 0 \nExample: 0123456789")
+            SignInSignUpPage.MobileNoCheck()
+        else:
+            SignInSignUpPage.Passwordcheck()
+    def Passwordcheck():
+        global Passwordsa
+        special_characters = "@&"
+        Passwordsa=input("Please enter your password: ")
+        if Passwordsa[-1].isnumeric() and any(c in special_characters for c in Passwordsa):
+            ReEnterpassword=input("Confirm Your entered password: ")#Checking recheckingPassWord
+            if ReEnterpassword[-1].isnumeric() and any(c in special_characters for c in ReEnterpassword) :
+                SignInSignUpPage.BirthDateCheck() 
+            else:
+                print("*The password not match")
+                SignInSignUpPage.Passwordcheck()     
+        else:
+            print("*The password must initiate with alphabets followed by either one of @,& and ending with numeric\n*For Example:sam&0125 : ")
+            return SignInSignUpPage.Passwordcheck()
+    def BirthDateCheck():
+
+        DateOfbirth=input("Please Enter your date of birth # DD/MM/YYYY (No Space) :\n")
+        if len(DateOfbirth)==10 and DateOfbirth[-4:].isnumeric():
+            import datetime
+            x = datetime.datetime.now()
+            CurrentYear=x.year
+            if (CurrentYear-int(DateOfbirth[-4:]))<21:
+                print('Sorry your can Your Our Service because your are under 20 and only 21 age of avobe can use it')
+            else:
+                print("*****You Have Successfully signed up*****")
+                UserDataStire=UserData(NameofUser,AddressPoint,MobilePoint,Passwordsa) # Creating a new object# Calling to print data
+                UserDataStire.DataaddinftoDict()
+                SignInSignUpPage.options(12)
+        else:
+            
+            return SignInSignUpPage.BirthDateCheck()      
+    def SignIn():
+        EnterUserMobile=input("Enter your Mobile Number: ")
+        EnterPassword=input('Enter your password')
+        macthing=AllUserDictip[EnterUserMobile]['UserPassword']
+        
+        if EnterPassword==macthing:
+            print("SuccessFullyLogin")
+            page2_1.aftersignin(1)
+        elif EnterPassword not in AllUserDictip :
+            print('No Data Found , ReEnter your information ')
+            SignInSignUpPage.SignIn()
+
+        else:
+            print("No Data Found , ReEnter your information")
+            SignInSignUpPage.SignIn()    
+User=SignInSignUpPage()
+User.options()
